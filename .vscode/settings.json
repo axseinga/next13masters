@@ -12,5 +12,6 @@
 	},
 	"editor.quickSuggestions": {
 		"strings": true
-	}
+	},
+	"javascript.preferences.importModuleSpecifier": "non-relative"
 }
