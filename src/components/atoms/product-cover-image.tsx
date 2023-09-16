@@ -14,6 +14,7 @@ export const ProductCoverImage = ({ src, alt }: ProductCoverImageProps) => {
 				src={src}
 				alt={alt}
 				className="h-full w-full object-cover object-center p-4 transition-transform hover:scale-105 cursor-pointer"
+				priority
 			/>
 		</div>
 	);

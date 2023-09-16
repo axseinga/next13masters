@@ -49,7 +49,7 @@ export default function Products() {
 	];
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<main>
 			<ul data-testid="products-list" className="grid grid-cols-1 gap-4 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{data?.map((product) => {
 					return (
