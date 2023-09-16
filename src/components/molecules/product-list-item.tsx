@@ -14,7 +14,7 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
 			</div>
 			<div className="m-4 flex flex-col gap-3">
 				<p className="flex justify-between">
-					<span>{data.title}</span>
+					<h3>{data.title}</h3>
 					<span>{data.review_score}</span>
 				</p>
 				<p>{formatCurrency(data.price / 100)}</p>
