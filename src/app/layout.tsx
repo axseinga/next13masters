@@ -1,6 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Nav } from "@/components/organisms/nav";
+import { Footer } from "@/components/organisms/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,11 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<div className="flex min-h-screen flex-col items-center justify-between p-24">
-					{" "}
-					{children}
-				</div>
+			<body className={`${inter.className} overscroll-none`}>
+				<Nav />
+				<div className="flex h-full flex-col items-center justify-between px-24 py-12"> {children}</div>
+				<Footer />
 			</body>
 		</html>
 	);
