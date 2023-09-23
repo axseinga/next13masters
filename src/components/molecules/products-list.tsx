@@ -10,11 +10,11 @@ export const ProductsList = async ({ products }: { products: ProductListItemT[] 
 		>
 			{products.map((product) => {
 				return (
-					<Link key={product.id} href={`/product/${product.id}`}>
-						<li className="border-2 shadow-xl">
+					<li key={product.id} className="border-2 shadow-xl">
+						<Link href={`/product/${product.id}`}>
 							<ProductListItem data={product} />
-						</li>
-					</Link>
+						</Link>
+					</li>
 				);
 			})}
 		</ul>
