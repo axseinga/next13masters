@@ -4,7 +4,7 @@ export const Pagination = async () => {
 	const pages = Array.from({ length: 10 }, (_, i) => i + 1);
 	return (
 		<div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 sm:px-0">
-			<ul className="hidden w-full justify-center md:-mt-px md:flex">
+			<ul className="hidden w-full justify-center md:-mt-px md:flex" aria-label="pagination">
 				{pages?.map((item, index) => (
 					<li key={index}>
 						<ActiveLink

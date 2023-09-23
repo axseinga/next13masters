@@ -23,7 +23,7 @@ export const ActiveLink = <T extends string>({
 	const pathname = usePathname();
 	const isActive = exact
 		? pathname === href
-		: pathname.startsWith(href) && pathname[href.length] === "/";
+		: pathname.startsWith(href) && pathname[href.length] === "/" || pathname.length === href.length;
 
 	return (
 		<Link
