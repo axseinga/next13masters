@@ -10,7 +10,8 @@ export const Pagination = async () => {
 						key={index}
 						href={`/products/${index + 1}`}
 						className="inline-flex items-center border-t-2 border-transparent px-4 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-						activeClassName="border-black text-black"
+						activeClassName="bg-slate-600 text-white"
+						exact
 					>
 						{item}
 					</ActiveLink>

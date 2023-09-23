@@ -16,18 +16,20 @@ type ActiveLinkProps<T extends string> = {
 export const ActiveLink = <T extends string>({
 	href,
 	children,
+	exact,
 	className,
 	activeClassName,
 }: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
-	const isActive =
-		pathname === href || (pathname[href.length] === "/" && pathname.startsWith(href));
+	const isActive = exact
+		? pathname === href
+		: pathname.startsWith(href) && pathname[href.length] === "/";
 
 	return (
 		<Link
 			href={href}
 			className={clsx(className, isActive && activeClassName)}
-			aria-current={activeClassName ? true : false}
+			aria-current={isActive ? true : false}
 		>
 			{children}
 		</Link>
