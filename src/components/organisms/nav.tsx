@@ -1,31 +1,37 @@
 import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "../atoms/active-link";
 
 export const Nav = () => {
 	const navLinks = [
 		{ label: "Home", href: "/" },
-		{ label: "Products", href: "/products" },
-	];
+		{ label: "All", href: "/products" },
+		// { label: "T-shirts", href: "/t-shirts" },
+		// { label: "Hoodies", href: "/hoodies" },
+		// { label: "Accessories", href: "/accesories" },
+	] as const;
 
 	return (
 		<header className="max-w mx-auto flex h-16 w-full content-center justify-center">
-			<nav className="max-w mx-auto flex w-full content-center justify-between bg-white p-2 px-8">
-				<Image
-					src="/assets/shop-logo.png"
-					alt="Shoppy"
-					width="150"
-					height="50"
-					layout="intrinsic"
-				/>
-				<ul className="flex items-center justify-items-center gap-4">
-					{navLinks.map((link) => (
-						<li key={link.href}>
-							<ActiveLink href={link.href}>{link.label}</ActiveLink>
-						</li>
-					))}
-				</ul>
+			<nav className="max-w mx-auto flex w-full content-center justify-between bg-white px-8 py-9">
 				<div className="flex items-center justify-items-center gap-10">
-					<p>Cart</p>
+					<Image
+						src="/assets/shop-logo.png"
+						alt="Shoppy"
+						width="150"
+						height="50"
+						layout="intrinsic"
+					/>
+					<ul className="flex items-center justify-items-center gap-4">
+						{navLinks.map((link) => (
+							<li key={link.href}>
+								<ActiveLink href={link.href} className="hover:text-amber-800" activeClassName="border-b-2 border-b-orange-950" exact={false}>{link.label}</ActiveLink>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className="flex items-center justify-items-center gap-10">
+					<ShoppingCart />
 				</div>
 			</nav>
 		</header>
