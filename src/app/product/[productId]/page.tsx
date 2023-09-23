@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { getProductById, getProductsList } from "@/app/api/products";
+import { getProductById, getProducts } from "@/app/api/products";
 import { ProductCoverImage } from "@/components/atoms/product-cover-image";
 import { SuggestedProductsList } from "@/components/molecules/suggested-products-list";
 
 export const generateStaticParams = async () => {
-	const products = await getProductsList(20);
+	const products = await getProducts(20);
 	return products.map((product) => ({
 		productId: product.id,
 	}));
