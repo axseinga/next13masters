@@ -24,13 +24,13 @@ export const productResponseItemToProductItemT = (
 ): ProductListItemT => {
 	return {
 		id: product.id,
-		title: product.title,
+		name: product.title,
 		description: product.description,
-		image: {
-			url: product.image,
-			alt: product.title,
-		},
+		images: [
+			{
+				url: product.image,
+			},
+		],
 		price: product.price,
-		review_score: product.rating.rate,
 	};
 };

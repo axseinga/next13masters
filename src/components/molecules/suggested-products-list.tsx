@@ -1,7 +1,8 @@
 import { ProductsList } from "./products-list";
-import { getProducts } from "@/app/api/products";
+import { ProductsGetListDocument } from "@/gql/graphql";
+import { executeGraphql } from "@/app/api/graphqlApi";
 
 export const SuggestedProductsList = async () => {
-	const products = await getProducts(20);
-	return <ProductsList products={products.slice(-4)} />;
+	const { products } = await executeGraphql(ProductsGetListDocument);
+	return <ProductsList products={products.slice(-4)} data-testid="related-products"/>;
 };

@@ -10,15 +10,13 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
 	return (
 		<div className="h-full">
 			<div className="bg-white">
-				<ProductCoverImage src={data.image.url} alt={data.image.alt}/>
+				<ProductCoverImage src={data.images[0].url} alt={data.name} />
 			</div>
-			<div className="m-4 flex flex-col gap-3 h-56 justify-evenly">
+			<div className="h-30 m-4 flex flex-col justify-evenly gap-3">
 				<div className="flex justify-between">
-					<h3>{data.title}</h3>
-					<span>{data.review_score.toFixed()}</span>
+					<h3>{data.name}</h3>
+					<span>{formatCurrency(data.price / 100)}</span>
 				</div>
-				<p>{formatCurrency(data.price / 100)}</p>
-				<p className="text-sm">{data.description}</p>
 				<button className="rounded border border-slate-600 bg-transparent px-4 py-2 font-semibold text-slate-600 hover:border-transparent hover:bg-slate-600 hover:text-white">
 					Add to basket
 				</button>

@@ -14,12 +14,10 @@ export type ProductResponseItemT = {
 
 export type ProductListItemT = {
 	id: string;
-	title: string;
+	name: string;
 	description: string;
 	price: number;
-	review_score: number;
-	image: {
+	images: {
 		url: string;
-		alt: string;
-	};
+	}[]
 };
