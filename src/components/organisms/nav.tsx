@@ -6,9 +6,8 @@ export const Nav = () => {
 	const navLinks = [
 		{ label: "Home", href: "/" },
 		{ label: "All", href: "/products/1" },
-		{ label: "T-shirts", href: "/products/categories/t-shirts/1" },
-		{ label: "Hoodies", href: "/products/categories/hoodies/1" },
-		{ label: "Accessories", href: "/products/categories/accessories/1" },
+		{ label: "Categories", href: "/products/categories" },
+		{ label: "Collections", href: "/products/collections" },
 	] as const;
 
 	return (

@@ -5,6 +5,8 @@ const nextConfig = {
 	},
 	experimental: {
 		typedRoutes: true,
+		workerThreads: false,
+		cpus: 1
 	},
 	async redirects() {
 		return [
