@@ -1,6 +1,5 @@
-query ProductsGetList {
-	products(first: 100) {
-		id
+fragment productListContent on Product {
+  		id
 		name
 		description
 		categories(first: 1) {
@@ -10,5 +9,4 @@ query ProductsGetList {
 			url
 		}
 		price
-	}
 }

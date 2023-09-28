@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-
 import { ProductCoverImage } from "@/components/atoms/product-cover-image";
 import { SuggestedProductsList } from "@/components/molecules/suggested-products-list";
-import { ProductGetByIdDocument } from "@/gql/graphql";
+import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
-// export const generateStaticParams = async () => {
-// 	const products = await getProductsList(20);
-// 	return products.map((product) => ({
-// 		productId: product.id,
-// 	}));
-// };
+
+export const generateStaticParams = async () => {
+	const { products } = await executeGraphql(ProductsGetListDocument);
+	return products.map((product) => ({
+		productId: product.id,
+	}));
+};
 
 export const generateMetadata = async ({
 	params,
