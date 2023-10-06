@@ -1,5 +1,5 @@
 query ProductsGetListByCategory($first: Int!, $skip: Int!, $category: String!) {
 	products(first: $first, skip: $skip, where: { categories_some: { slug_in: [$category] } }) {
-		...productListContent
+		...productListItem
 	}
 }

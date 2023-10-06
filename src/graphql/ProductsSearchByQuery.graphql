@@ -1,0 +1,5 @@
+query ProductsSearchByQuery($param: String!) {
+	products(where: { name_contains: $param }) {
+		...productListItem
+	}
+}

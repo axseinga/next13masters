@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ProductListItem } from "@/components/molecules/product-list-item";
-import type { ProductListItemT } from "@/types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 
-export const ProductsList = async ({ products }: { products: ProductListItemT[] }) => {
+export const ProductsList = async ({ products }: { products: ProductListItemFragment[] }) => {
 	return (
 		<ul
 			data-testid="products-list"

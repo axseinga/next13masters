@@ -10731,7 +10731,7 @@ export type ProductsGetListByCollectionQueryVariables = Exact<{
 
 export type ProductsGetListByCollectionQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
-export type ProductListContentFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+export type ProductListItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
 export type ProductsGetCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10760,6 +10760,13 @@ export type ProductsGetListByPageQueryVariables = Exact<{
 
 export type ProductsGetListByPageQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ProductsSearchByQueryQueryVariables = Exact<{
+  param: Scalars['String']['input'];
+}>;
+
+
+export type ProductsSearchByQueryQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -10774,8 +10781,8 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
-export const ProductListContentFragmentDoc = new TypedDocumentString(`
-    fragment productListContent on Product {
+export const ProductListItemFragmentDoc = new TypedDocumentString(`
+    fragment productListItem on Product {
   id
   name
   description
@@ -10787,14 +10794,14 @@ export const ProductListContentFragmentDoc = new TypedDocumentString(`
   }
   price
 }
-    `, {"fragmentName":"productListContent"}) as unknown as TypedDocumentString<ProductListContentFragment, unknown>;
+    `, {"fragmentName":"productListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(where: {id: $id}) {
-    ...productListContent
+    ...productListItem
   }
 }
-    fragment productListContent on Product {
+    fragment productListItem on Product {
   id
   name
   description
@@ -10813,10 +10820,10 @@ export const ProductsGetListByCollectionDocument = new TypedDocumentString(`
     skip: $skip
     where: {collections_some: {slug_in: [$collection]}}
   ) {
-    ...productListContent
+    ...productListItem
   }
 }
-    fragment productListContent on Product {
+    fragment productListItem on Product {
   id
   name
   description
@@ -10840,19 +10847,21 @@ export const ProductsGetCountDocument = new TypedDocumentString(`
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
   products(first: 100) {
-    id
-    name
-    description
-    categories(first: 1) {
-      name
-    }
-    images(first: 1) {
-      url
-    }
-    price
+    ...productListItem
   }
 }
-    `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+    fragment productListItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
 export const ProductsGetListByCategoryDocument = new TypedDocumentString(`
     query ProductsGetListByCategory($first: Int!, $skip: Int!, $category: String!) {
   products(
@@ -10860,10 +10869,10 @@ export const ProductsGetListByCategoryDocument = new TypedDocumentString(`
     skip: $skip
     where: {categories_some: {slug_in: [$category]}}
   ) {
-    ...productListContent
+    ...productListItem
   }
 }
-    fragment productListContent on Product {
+    fragment productListItem on Product {
   id
   name
   description
@@ -10878,10 +10887,10 @@ export const ProductsGetListByCategoryDocument = new TypedDocumentString(`
 export const ProductsGetListByPageDocument = new TypedDocumentString(`
     query ProductsGetListByPage($first: Int!, $skip: Int!) {
   products(first: $first, skip: $skip) {
-    ...productListContent
+    ...productListItem
   }
 }
-    fragment productListContent on Product {
+    fragment productListItem on Product {
   id
   name
   description
@@ -10893,3 +10902,21 @@ export const ProductsGetListByPageDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetListByPageQuery, ProductsGetListByPageQueryVariables>;
+export const ProductsSearchByQueryDocument = new TypedDocumentString(`
+    query ProductsSearchByQuery($param: String!) {
+  products(where: {name_contains: $param}) {
+    ...productListItem
+  }
+}
+    fragment productListItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsSearchByQueryQuery, ProductsSearchByQueryQueryVariables>;

@@ -8,7 +8,7 @@ import { executeGraphql } from "@/app/api/graphqlApi";
 
 export const generateStaticParams = async () => {
 	const { products } = await executeGraphql(ProductsGetListDocument);
-	return products.map((product) => ({
+	return products.slice(-2).map((product) => ({
 		productId: product.id,
 	}));
 };

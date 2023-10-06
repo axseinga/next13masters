@@ -1,9 +1,9 @@
 import { ProductCoverImage } from "../atoms/product-cover-image";
-import type { ProductListItemT } from "@/types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatCurrency } from "@/utils/utils";
 
 type ProductListItemProps = {
-	data: ProductListItemT;
+	data: ProductListItemFragment;
 };
 
 export const ProductListItem = ({ data }: ProductListItemProps) => {

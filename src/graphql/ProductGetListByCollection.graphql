@@ -1,5 +1,5 @@
 query ProductsGetListByCollection($first: Int!, $skip: Int!, $collection: String!) {
 	products(first: $first, skip: $skip, where: { collections_some: { slug_in: [$collection] } }) {
-		...productListContent
+		...productListItem
 	}
 }
