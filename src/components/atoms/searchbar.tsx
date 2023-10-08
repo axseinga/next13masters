@@ -12,6 +12,8 @@ export const Searchbar = () => {
 		setSearchValue(e.target.value);
 	};
 
+	// @todo fix path, find way to handle backspaces
+
 	const handleSubmit = (e: React.FormEvent) => {
 		if (searchValue === "") return;
 		e.preventDefault();

@@ -10720,7 +10720,7 @@ export type ProductGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
+export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, variants: Array<{ name: string } | { name: string } | {}>, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
 export type ProductsGetListByCollectionQueryVariables = Exact<{
   first: Scalars['Int']['input'];
@@ -10799,6 +10799,14 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(where: {id: $id}) {
     ...productListItem
+    variants {
+      ... on ProductColorVariant {
+        name
+      }
+      ... on ProductSizeColorVariant {
+        name
+      }
+    }
   }
 }
     fragment productListItem on Product {
