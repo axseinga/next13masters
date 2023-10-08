@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getCartFromCookies } from "@/app/api/cart";
 import { formatCurrency } from "@/utils/utils";
+import { IncrementProductQuantity } from "@/components/atoms/increment-item-quantity";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -20,7 +21,7 @@ export default async function CartPage() {
 							<div>{item.product?.name}</div>
 							<div className="flex">
 								<span>
-									{item.product?.price && formatCurrency(item.product?.price / 100)} x {item.quantity}
+									{item.product?.price && formatCurrency(item.product?.price / 100)} x <IncrementProductQuantity quantity={item.quantity} itemId={item.id}/>
 								</span>{" "}
 								<button className="text-color-primary hover:text-color-secondary ml-4 bg-transparent text-xs font-semibold">
 									<svg
