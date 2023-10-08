@@ -7,8 +7,8 @@ export const Nav = () => {
 	const navLinks = [
 		{ label: "Home", href: "/" },
 		{ label: "All", href: "/products/1" },
-		{ label: "Categories", href: "/categories" },
 		{ label: "Collections", href: "/collections" },
+		{ label: "Hoodies", href: "/categories/hoodies/1" },
 	] as const;
 
 	return (
