@@ -29,7 +29,7 @@ export const ActiveLink = <T extends string>({
 		<Link
 			href={href}
 			className={clsx(className, isActive && activeClassName)}
-			aria-current={isActive && "page"}
+			{...(isActive && { "aria-current": "page" })}
 		>
 			{children}
 		</Link>
