@@ -5,6 +5,7 @@ const nextConfig = {
 	},
 	experimental: {
 		typedRoutes: true,
+		serverActions: true,
 		workerThreads: false,
 		cpus: 1
 	},

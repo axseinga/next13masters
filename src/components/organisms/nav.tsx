@@ -37,7 +37,9 @@ export const Nav = () => {
 				</div>
 				<div className="flex items-center justify-items-center gap-10">
 					<Searchbar />
-					<ShoppingCart />
+					<Link href="/cart">
+						<ShoppingCart />
+					</Link>
 				</div>
 			</nav>
 		</header>

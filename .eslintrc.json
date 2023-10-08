@@ -71,10 +71,19 @@
 			{ "allowNumber": true, "allowBoolean": true }
 		],
 		"no-restricted-imports": [
-			"error", 
+			"error",
 			{
 				"name": "next/router",
 				"message": "Please use next/navigation instead"
+			}
+		],
+		// Server Actions `action={…}`
+		"@typescript-eslint/no-misused-promises": [
+			"error",
+			{
+				"checksVoidReturn": {
+					"attributes": false
+				}
 			}
 		]
 	},

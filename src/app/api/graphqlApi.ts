@@ -20,6 +20,7 @@ export const executeGraphql = async <TResult, TVariables>(
 		}),
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${process.env.MUTATION_TOKEN}`,
 		},
 	});
 
