@@ -1,11 +1,12 @@
 import NextImage from "next/image";
+import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { Searchbar } from "../atoms/searchbar";
 import { ActiveLink } from "../atoms/active-link";
 
 export const Nav = () => {
 	const navLinks = [
-		{ label: "Home", href: "/products/1" },
+		{ label: "Products", href: "/products/1" },
 		{ label: "Summer Vibes", href: "/collections/summer-vibes/1" },
 		{ label: "Hoodies", href: "/categories/hoodies/1" },
 	] as const;
@@ -14,7 +15,10 @@ export const Nav = () => {
 		<header className="max-w mx-auto flex h-16 w-full content-center justify-center">
 			<nav className="max-w mx-auto flex w-full content-center justify-between bg-white px-8 py-9">
 				<div className="flex items-center justify-items-center gap-10">
-					<NextImage src="/assets/shop-logo.png" alt="Shoppy" width="150" height="50" />
+					<Link href="/">
+						{" "}
+						<NextImage src="/assets/shop-logo.png" alt="Shoppy" width="150" height="50" />
+					</Link>
 					<ul className="flex items-center justify-items-center gap-4">
 						{navLinks.map((link) => (
 							<li key={link.href}>

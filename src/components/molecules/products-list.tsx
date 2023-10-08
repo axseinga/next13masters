@@ -11,7 +11,7 @@ export const ProductsList = async ({ products }: { products: ProductListItemFrag
 			{products.map((product) => {
 				return (
 					<li key={product.id} className="border-2 shadow-xl">
-						<Link href={`/product/${product.id}`}>
+						<Link href={`/product/${product.name}`}>
 							<ProductListItem data={product} />
 						</Link>
 					</li>
