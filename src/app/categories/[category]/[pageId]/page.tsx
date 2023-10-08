@@ -1,9 +1,21 @@
+import { type Metadata } from "next";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { ActiveLink } from "@/components/atoms/active-link";
 import { Pagination } from "@/components/molecules/pagination";
 import { ProductsList } from "@/components/molecules/products-list";
 import { ProductsGetListByCategoryDocument } from "@/gql/graphql";
 import { PRODUCTS_PER_PAGE } from "@/utils/consts";
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { category: string };
+}): Promise<Metadata> => {
+	const category = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+	return {
+		title: `${category} - Shop`,
+	};
+};
 
 export default async function ProductsByCategory({
 	params,

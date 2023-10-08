@@ -1,8 +1,19 @@
+import { type Metadata } from "next";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { Pagination } from "@/components/molecules/pagination";
 import { ProductsList } from "@/components/molecules/products-list";
 import { ProductsGetListByCollectionDocument } from "@/gql/graphql";
 import { PRODUCTS_PER_PAGE } from "@/utils/consts";
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { collection: string };
+}): Promise<Metadata> => {
+	return {
+		title: `${params.collection} - Shop`,
+	};
+};
 
 export default async function ProductsByCollection({
 	params,
