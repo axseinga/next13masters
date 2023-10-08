@@ -5,9 +5,8 @@ import { ActiveLink } from "../atoms/active-link";
 
 export const Nav = () => {
 	const navLinks = [
-		{ label: "Home", href: "/" },
-		{ label: "All", href: "/products/1" },
-		{ label: "Collections", href: "/collections" },
+		{ label: "Home", href: "/products/1" },
+		{ label: "Summer Vibes", href: "/collections/summer-vibes/1" },
 		{ label: "Hoodies", href: "/categories/hoodies/1" },
 	] as const;
 

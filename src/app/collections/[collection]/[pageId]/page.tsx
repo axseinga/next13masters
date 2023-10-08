@@ -4,6 +4,7 @@ import { Pagination } from "@/components/molecules/pagination";
 import { ProductsList } from "@/components/molecules/products-list";
 import { ProductsGetListByCollectionDocument } from "@/gql/graphql";
 import { PRODUCTS_PER_PAGE } from "@/utils/consts";
+import { ActiveLink } from "@/components/atoms/active-link";
 
 export const generateMetadata = async ({
 	params,
@@ -27,9 +28,29 @@ export default async function ProductsByCollection({
 		collection: params.collection,
 	});
 
+	const links = [
+		{ label: "Summer Vibes", href: "/collections/summer-vibes/1" },
+		{ label: "New Arrivals", href: "/collections/new-arrivals/1" },
+		{ label: "Elegant Extras", href: "/collections/elegant-extras/1" },
+	] as const;
+
 	return (
 		<main>
 			<h2>{params.collection}</h2>
+			<div className="flex">
+				{links.map((link) => (
+					<li key={link.href}>
+						<ActiveLink
+							href={link.href}
+							className="hover:text-amber-800"
+							activeClassName="border-b-2 border-b-orange-950"
+							exact={false}
+						>
+							{link.label}
+						</ActiveLink>
+					</li>
+				))}
+			</div>
 			<ProductsList products={products} />
 			<Pagination category={params.collection} pagesCount={products.length / PRODUCTS_PER_PAGE} />
 		</main>
