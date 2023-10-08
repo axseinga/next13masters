@@ -1,11 +1,11 @@
 import { ActiveLink } from "@/components/atoms/active-link";
 
-export default function Collections() {
+export default function Categories() {
 
     const links = [
-		{ label: "Summer Vibes", href: "/products/collections/summer-vibes/1" },
-		{ label: "New Arrivals", href: "/products/collections/new-arrivals/1" },
-		{ label: "Elegant Extras", href: "/products/collections/elegant-extras/1" },
+		{ label: "T-shirts", href: "/categories/t-shirts/1" },
+		{ label: "Hoodies", href: "/categories/hoodies/1" },
+		{ label: "Accessories", href: "/categories/accessories/1" },
 	] as const;
 	return (
 		<main>

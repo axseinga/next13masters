@@ -18,6 +18,7 @@ export default async function ProductsByCollection({
 
 	return (
 		<main>
+			<h2>{params.collection}</h2>
 			<ProductsList products={products} />
 			<Pagination category={params.collection} pagesCount={products.length / PRODUCTS_PER_PAGE} />
 		</main>
