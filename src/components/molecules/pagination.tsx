@@ -7,7 +7,10 @@ export const Pagination = async ({
 	category?: string;
 	pagesCount: number;
 }) => {
-	const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
+	const min = pagesCount < 1 ? 1 : pagesCount;
+	const pages = Array.from({ length: min }, (_, i) => i + 1);
+
+	console.log(pagesCount);
 	return (
 		<div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 sm:px-0">
 			<ul className="hidden w-full justify-center md:-mt-px md:flex" aria-label="pagination">
