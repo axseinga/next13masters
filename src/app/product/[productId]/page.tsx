@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 	return (
 		<main>
-			<article className="flex bg-white p-4">
+			<article className="grid grid-cols-[40%_minmax(60%,_1fr)_100px] bg-white p-4">
 				<ProductCoverImage src={product.images[0].url} alt={product.name} />
 				<div className="flex flex-col justify-between gap-5 py-10">
 					<div className="flex flex-col justify-between gap-5">
