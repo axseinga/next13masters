@@ -35,9 +35,11 @@ export default async function ProductsByCategory({
 		{ label: "Accessories", href: "/categories/accessories/1" },
 	] as const;
 
+	const category = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+
 	return (
 		<main>
-			<h2>{params.category}</h2>
+			<h2>{category}</h2>
 			<div className="flex">
 				{links.map((link) => (
 					<li key={link.href}>
