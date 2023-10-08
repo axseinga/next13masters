@@ -64,6 +64,7 @@ export const Searchbar = () => {
 				<input
 					type="search"
 					id="search"
+					role="searchbox"
 					name="search"
 					value={searchValue}
 					onChange={handleChange}

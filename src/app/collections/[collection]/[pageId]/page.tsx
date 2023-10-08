@@ -34,9 +34,14 @@ export default async function ProductsByCollection({
 		{ label: "Elegant Extras", href: "/collections/elegant-extras/1" },
 	] as const;
 
+	const collectionNameArr = params.collection.split("-");
+	const collectionName = collectionNameArr
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
+
 	return (
 		<main>
-			<h2>{params.collection}</h2>
+			<h2>{collectionName}</h2>
 			<div className="flex">
 				{links.map((link) => (
 					<li key={link.href}>
