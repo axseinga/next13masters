@@ -11,8 +11,12 @@ export const generateMetadata = async ({
 }: {
 	params: { collection: string };
 }): Promise<Metadata> => {
+	const collectionNameArr = params.collection.split("-");
+	const collectionName = collectionNameArr
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
 	return {
-		title: `${params.collection} - Shop`,
+		title: collectionName,
 	};
 };
 
