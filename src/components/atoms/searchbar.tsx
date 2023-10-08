@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import React from "react";
@@ -18,6 +19,7 @@ export const Searchbar = () => {
 		if (searchValue === "") return;
 		e.preventDefault();
 		const path = `/search/?query=${searchValue}` as const;
+		// @ts-ignore
 		router.push(path);
 	};
 
@@ -32,6 +34,7 @@ export const Searchbar = () => {
 			timer = setTimeout(() => {
 				if (searchValue === "") return;
 				const path = `/search/?query=${searchValue}` as const;
+				// @ts-ignore
 				router.push(path);
 			}, 5000);
 		};
