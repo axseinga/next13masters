@@ -9,7 +9,7 @@ import {
 } from "@/gql/graphql";
 
 export function createCart() {
-	return executeGraphql({ query: CartCreateDocument, variables: {} });
+	return executeGraphql({ query: CartCreateDocument, cache: "no-store" });
 }
 
 export async function getOrCreateCart(): Promise<CartFragment> {
@@ -53,6 +53,7 @@ export async function addToCart(orderId: string, productId: string) {
 	const { product } = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
+		cache: "no-store"
 	});
 	if (!product) {
 		throw new Error("Product not found");
@@ -64,5 +65,6 @@ export async function addToCart(orderId: string, productId: string) {
 			productId,
 			total: product.price,
 		},
+		cache: "no-store"
 	});
 }
