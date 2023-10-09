@@ -26,11 +26,11 @@ export default async function ProductsByCollection({
 	params: { collection: string; pageId: string };
 }) {
 	const skip: number = (Number(params.pageId) - 1) * PRODUCTS_PER_PAGE;
-	const { products } = await executeGraphql(ProductsGetListByCollectionDocument, {
+	const { products } = await executeGraphql({ query: ProductsGetListByCollectionDocument, variables: {
 		first: PRODUCTS_PER_PAGE,
 		skip: skip,
 		collection: params.collection,
-	});
+	}});
 
 	const links = [
 		{ label: "Summer Vibes", href: "/collections/summer-vibes/1" },

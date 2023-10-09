@@ -18,7 +18,7 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
 					<span>{formatCurrency(data.price / 100)}</span>
 				</div>
 				<button className="rounded border border-slate-600 bg-transparent px-4 py-2 font-semibold text-slate-600 hover:border-transparent hover:bg-slate-600 hover:text-white">
-					Add to basket
+					See more
 				</button>
 			</div>
 		</div>

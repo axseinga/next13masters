@@ -23,11 +23,11 @@ export default async function ProductsByCategory({
 	params: { category: string; pageId: string };
 }) {
 	const skip: number = (Number(params.pageId) - 1) * PRODUCTS_PER_PAGE;
-	const { products } = await executeGraphql(ProductsGetListByCategoryDocument, {
+	const { products } = await executeGraphql({ query: ProductsGetListByCategoryDocument, variables: {
 		first: PRODUCTS_PER_PAGE,
 		skip: skip,
 		category: params.category,
-	});
+	}});
 
 	const links = [
 		{ label: "T-shirts", href: "/categories/t-shirts/1" },

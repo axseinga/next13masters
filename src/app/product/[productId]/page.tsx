@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { revalidateTag } from "next/cache";
 import { ProductCoverImage } from "@/components/atoms/product-cover-image";
 import { SuggestedProductsList } from "@/components/molecules/suggested-products-list";
 import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
@@ -10,7 +10,7 @@ import { AddToCartButton } from "@/components/atoms/add-to-cart-button";
 import { addToCart, getOrCreateCart } from "@/app/api/cart";
 
 export const generateStaticParams = async () => {
-	const { products } = await executeGraphql(ProductsGetListDocument);
+	const { products } = await executeGraphql({ query: ProductsGetListDocument, variables: {} });
 	return products.slice(-2).map((product) => ({
 		productId: product.id,
 	}));
@@ -21,7 +21,10 @@ export const generateMetadata = async ({
 }: {
 	params: { productId: string };
 }): Promise<Metadata> => {
-	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.productId });
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id: params.productId },
+	});
 
 	if (!product)
 		return {
@@ -36,7 +39,10 @@ export const generateMetadata = async ({
 };
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, { id: params.productId });
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id: params.productId },
+	});
 
 	if (!product) {
 		return notFound();
@@ -53,14 +59,9 @@ export default async function ProductPage({ params }: { params: { productId: str
 		"use server";
 
 		const cart = await getOrCreateCart();
-		cookies().set("cartId", cart.id, {
-			maxAge: 60 * 60 * 24 * 365,
-			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
-			httpOnly: true,
-			sameSite: "lax",
-			// secure: true
-		});
 		await addToCart(cart.id, params.productId);
+
+		revalidateTag("cart");
 	};
 
 	return (
