@@ -41,6 +41,12 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  stripe:
+    specifier: ^13.9.0
+    version: 13.9.0
+  stripe-event-types:
+    specifier: ^3.0.0
+    version: 3.0.0(stripe@13.9.0)
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
@@ -4288,6 +4294,13 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
+  /qs@6.11.2:
+    resolution: {integrity: sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: false
+
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -4665,6 +4678,22 @@ packages:
   /strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  /stripe-event-types@3.0.0(stripe@13.9.0):
+    resolution: {integrity: sha512-PMsF7TP3R2HEjEDw4Xxr5KBDGGrTzecBIMeAz97UmwVdmfwUKvbue45o/Ik6WdidSCaQbeunff5fUZqr/OVGng==}
+    peerDependencies:
+      stripe: '>=10.0.0'
+    dependencies:
+      stripe: 13.9.0
+    dev: false
+
+  /stripe@13.9.0:
+    resolution: {integrity: sha512-sQAqodCvaw/iYWauHHdOWlFGj0oZj/3A51zs4rG5PN3SUJUFSSjtnbc9q5Djpls0iz3nXz2UwjzAdKHVP4dVqQ==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 20.8.3
+      qs: 6.11.2
+    dev: false
 
   /styled-jsx@5.1.1(@babel/core@7.23.0)(react@18.2.0):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
