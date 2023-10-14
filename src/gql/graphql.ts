@@ -10760,6 +10760,13 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, slug: string, name: string, description: string, price: number, variants: Array<{ name: string } | { name: string } | {}>, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
+export type ProductGetImageQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetImageQuery = { product?: { name: string, description: string, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
+
 export type ProductsGetListByCollectionQueryVariables = Exact<{
   first: Scalars['Int']['input'];
   skip: Scalars['Int']['input'];
@@ -10937,6 +10944,20 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductGetImageDocument = new TypedDocumentString(`
+    query ProductGetImage($id: ID!) {
+  product(where: {id: $id}) {
+    name
+    description
+    categories(first: 1) {
+      name
+    }
+    images(first: 1) {
+      url
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductGetImageQuery, ProductGetImageQueryVariables>;
 export const ProductsGetListByCollectionDocument = new TypedDocumentString(`
     query ProductsGetListByCollection($first: Int!, $skip: Int!, $collection: String!) {
   products(

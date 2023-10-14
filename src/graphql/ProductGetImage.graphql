@@ -1,0 +1,12 @@
+query ProductGetImage($id: ID!) {
+	product(where: { id: $id }) {
+		name
+		description
+		categories(first: 1) {
+			name
+		}
+		images(first: 1) {
+			url
+		}
+	}
+}
