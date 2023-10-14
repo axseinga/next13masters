@@ -80,6 +80,7 @@ export async function addToCart(orderId: string, productId: string) {
 		await executeGraphql({
 			query: CartSetItemQuantityDocument,
 			variables: { itemId, quantity},
+			cache: "no-store",
 		});
 
 	} else {
