@@ -8,6 +8,7 @@ import {
 	type CartFragment,
 	CartGetByIdDocument,
 	ProductGetByIdDocument,
+	CartSetItemQuantityDocument,
 } from "@/gql/graphql";
 
 export function createCart() {
@@ -60,15 +61,40 @@ export async function addToCart(orderId: string, productId: string) {
 	if (!product) {
 		throw new Error("Product not found");
 	}
-	await executeGraphql({
-		query: CartAddProductDocument,
-		variables: {
-			orderId,
-			productId,
-			total: product.price,
+
+	const cart = await executeGraphql({
+		query: CartGetByIdDocument,
+		variables: { id: orderId },
+		next: {
+			tags: ["cart"],
 		},
-		cache: "no-store",
 	});
+
+	const existingProduct = cart.order?.orderItems.find((item) => item.product?.id === productId);
+
+	if (existingProduct) {
+		const quantity = existingProduct.quantity + 1;
+
+		const itemId = existingProduct.id;
+
+		await executeGraphql({
+			query: CartSetItemQuantityDocument,
+			variables: { itemId, quantity},
+		});
+
+	} else {
+		await executeGraphql({
+			query: CartAddProductDocument,
+			variables: {
+				orderId,
+				productId,
+				total: product.price,
+			},
+			cache: "no-store",
+		});
+
+		console.log("added")
+	}
 }
 
 export async function handlePaymentAction() {

@@ -14,8 +14,12 @@ export const Nav = async () => {
 	] as const;
 
 	const cart = await getCartFromCookies();
-	// @todo items quantity 
-	const quantity = cart?.orderItems.length ?? 0;
+
+	let totalItems = 0;
+
+	if (cart) {
+		cart.orderItems.forEach((item) => (totalItems = totalItems + item.quantity));
+	}
 
 	return (
 		<header className="max-w mx-auto flex h-16 w-full content-center justify-center">
@@ -44,7 +48,7 @@ export const Nav = async () => {
 					<Searchbar />
 					<Link href="/cart" className="flex items-end">
 						<ShoppingCart />
-						<span className="ml-2 text-sm font-medium">{quantity}</span>
+						<span className="ml-2 text-sm font-medium" data-testid="quantity">{totalItems}</span>
 					</Link>
 				</div>
 			</nav>

@@ -11,10 +11,22 @@ export default async function CartPage() {
 		redirect("/");
 	}
 
+	let totalItems = 0;
+	cart.orderItems.forEach((item) => (totalItems = totalItems + item.quantity));
+
 	return (
 		<div className="w-full">
 			<p>Cart Summary</p>
-			<p data-testid="quantity">{cart.orderItems.length}</p>
+			<p data-testid="quantity">{totalItems}</p>
+			<form>
+				<button
+					type="submit"
+					data-testid="sort-by-price"
+					className="rounded border border-slate-600 bg-transparent px-4 py-2 font-semibold text-slate-600 hover:border-transparent hover:bg-slate-600 hover:text-white"
+				>
+					Sort by price
+				</button>
+			</form>
 			<br></br>
 			<ul className="divide-y divide-gray-800">
 				{cart.orderItems.map((item, index) => (
@@ -22,10 +34,13 @@ export default async function CartPage() {
 						<div className="flex justify-between">
 							<div>{item.product?.name}</div>
 							<div className="flex">
-								<span>
-									{item.product?.price && formatCurrency(item.product?.price / 100)} x{" "}
+								<div>
+									<span data-testid="product-price">
+										{item.product?.price && formatCurrency(item.product?.price / 100)}
+									</span>
+									x
 									<UpdateProductQuantity quantity={item.quantity} itemId={item.id} />
-								</span>{" "}
+								</div>
 								<RemoveButton itemId={item.id} />
 							</div>
 						</div>

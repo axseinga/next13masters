@@ -1,0 +1,5 @@
+query ProductsSortByPrice {
+	products(first: 100, orderBy: price_ASC) {
+		...productListItem
+	}
+}

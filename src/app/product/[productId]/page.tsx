@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { revalidateTag } from "next/cache";
 import { ProductCoverImage } from "@/components/atoms/product-cover-image";
 import { SuggestedProductsList } from "@/components/molecules/suggested-products-list";
 import { ProductGetByIdDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { AddToCartButton } from "@/components/atoms/add-to-cart-button";
-import { addToCart, getOrCreateCart } from "@/app/api/cart";
 import { ProductReviewContainer } from "@/components/product-review/prodct-review-container";
 
 export const generateStaticParams = async () => {
@@ -56,21 +54,12 @@ export default async function ProductPage({ params }: { params: { productId: str
 		variants.push(productVariant.name.toLowerCase());
 	});
 
-	const addToCartAction = async (_formData: FormData) => {
-		"use server";
-
-		const cart = await getOrCreateCart();
-		await addToCart(cart.id, params.productId);
-
-		revalidateTag("cart");
-	};
-
 	return (
 		<main className="flex flex-col gap-10">
 			<div className="grid grid-cols-2 gap-5">
-				<article className="grid grid-cols-[40%_minmax(60%,_1fr)_100px] border-2 shadow-xl p-4">
+				<article className="grid grid-cols-[40%_minmax(60%,_1fr)_100px] border-2 p-4 shadow-xl">
 					<ProductCoverImage src={product.images[0].url} alt={product.name} />
-					<form className="flex flex-col justify-between gap-5 py-10" action={addToCartAction}>
+					<div className="flex flex-col justify-between gap-5 py-10">
 						<div className="flex flex-col justify-between gap-5">
 							<h1 className="text-3xl font-bold">{product.name}</h1>
 							<p>{product.description}</p>
@@ -92,8 +81,8 @@ export default async function ProductPage({ params }: { params: { productId: str
 								</div>
 							</div>
 						</div>
-						<AddToCartButton />
-					</form>
+						<AddToCartButton productId={params.productId} />
+					</div>
 				</article>
 
 				<aside>

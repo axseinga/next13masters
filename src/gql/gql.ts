@@ -17,7 +17,7 @@ const documents = {
     "mutation CartAddProduct($orderId: ID!, $total: Int!, $productId: ID!) {\n  createOrderItem(\n    data: {quantity: 1, total: $total, product: {connect: {id: $productId}}, order: {connect: {id: $orderId}}}\n  ) {\n    id\n  }\n}": types.CartAddProductDocument,
     "mutation CartCreate {\n  createOrder(data: {total: 0}) {\n    ...Cart\n  }\n}": types.CartCreateDocument,
     "query CartGetById($id: ID!) {\n  order(where: {id: $id}, stage: DRAFT) {\n    ...Cart\n  }\n}": types.CartGetByIdDocument,
-    "fragment Cart on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      name\n      description\n      price\n    }\n  }\n}": types.CartFragmentDoc,
+    "fragment Cart on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      id\n      name\n      description\n      price\n    }\n  }\n}": types.CartFragmentDoc,
     "mutation CartRemoveProduct($itemId: ID!) {\n  deleteOrderItem(where: {id: $itemId}) {\n    id\n  }\n}": types.CartRemoveProductDocument,
     "mutation CartSetItemQuantity($itemId: ID!, $quantity: Int!) {\n  updateOrderItem(where: {id: $itemId}, data: {quantity: $quantity}) {\n    id\n  }\n}": types.CartSetItemQuantityDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...productListItem\n    variants {\n      ... on ProductColorVariant {\n        name\n      }\n      ... on ProductSizeColorVariant {\n        name\n      }\n    }\n  }\n}": types.ProductGetByIdDocument,
@@ -31,6 +31,7 @@ const documents = {
     "query ProductsGetListByCategory($first: Int!, $skip: Int!, $category: String!) {\n  products(\n    first: $first\n    skip: $skip\n    where: {categories_some: {slug_in: [$category]}}\n  ) {\n    ...productListItem\n  }\n}": types.ProductsGetListByCategoryDocument,
     "query ProductsGetListByPage($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...productListItem\n  }\n}": types.ProductsGetListByPageDocument,
     "query ProductsSearchByQuery($param: String!) {\n  products(where: {name_contains: $param}) {\n    ...productListItem\n  }\n}": types.ProductsSearchByQueryDocument,
+    "query ProductsSortByPrice {\n  products(first: 100, orderBy: price_ASC) {\n    ...productListItem\n  }\n}": types.ProductsSortByPriceDocument,
     "mutation ReviewCreate($productId: ID!, $headline: String!, $name: String!, $email: String!, $content: String!, $rating: Int!) {\n  createReview(\n    data: {headline: $headline, name: $name, email: $email, content: $content, rating: $rating, product: {connect: {id: $productId}}}\n  ) {\n    id\n  }\n}": types.ReviewCreateDocument,
     "mutation ReviewPublish($reviewId: ID!) {\n  publishReview(where: {id: $reviewId}, to: PUBLISHED) {\n    id\n  }\n}": types.ReviewPublishDocument,
 };
@@ -50,7 +51,7 @@ export function graphql(source: "query CartGetById($id: ID!) {\n  order(where: {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment Cart on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      name\n      description\n      price\n    }\n  }\n}"): typeof import('./graphql').CartFragmentDoc;
+export function graphql(source: "fragment Cart on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      id\n      name\n      description\n      price\n    }\n  }\n}"): typeof import('./graphql').CartFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -103,6 +104,10 @@ export function graphql(source: "query ProductsGetListByPage($first: Int!, $skip
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsSearchByQuery($param: String!) {\n  products(where: {name_contains: $param}) {\n    ...productListItem\n  }\n}"): typeof import('./graphql').ProductsSearchByQueryDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductsSortByPrice {\n  products(first: 100, orderBy: price_ASC) {\n    ...productListItem\n  }\n}"): typeof import('./graphql').ProductsSortByPriceDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

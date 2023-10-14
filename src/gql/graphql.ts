@@ -10727,16 +10727,16 @@ export type CartAddProductMutation = { createOrderItem?: { id: string } | null }
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { name: string, description: string, price: number } | null }> } | null };
+export type CartCreateMutation = { createOrder?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, description: string, price: number } | null }> } | null };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { order?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { name: string, description: string, price: number } | null }> } | null };
+export type CartGetByIdQuery = { order?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, description: string, price: number } | null }> } | null };
 
-export type CartFragment = { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { name: string, description: string, price: number } | null }> };
+export type CartFragment = { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, description: string, price: number } | null }> };
 
 export type CartRemoveProductMutationVariables = Exact<{
   itemId: Scalars['ID']['input'];
@@ -10821,6 +10821,11 @@ export type ProductsSearchByQueryQueryVariables = Exact<{
 
 export type ProductsSearchByQueryQuery = { products: Array<{ id: string, slug: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ProductsSortByPriceQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductsSortByPriceQuery = { products: Array<{ id: string, slug: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ReviewCreateMutationVariables = Exact<{
   productId: Scalars['ID']['input'];
   headline: Scalars['String']['input'];
@@ -10862,6 +10867,7 @@ export const CartFragmentDoc = new TypedDocumentString(`
     quantity
     total
     product {
+      id
       name
       description
       price
@@ -10915,6 +10921,7 @@ export const CartCreateDocument = new TypedDocumentString(`
     quantity
     total
     product {
+      id
       name
       description
       price
@@ -10934,6 +10941,7 @@ export const CartGetByIdDocument = new TypedDocumentString(`
     quantity
     total
     product {
+      id
       name
       description
       price
@@ -11123,6 +11131,25 @@ export const ProductsSearchByQueryDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsSearchByQueryQuery, ProductsSearchByQueryQueryVariables>;
+export const ProductsSortByPriceDocument = new TypedDocumentString(`
+    query ProductsSortByPrice {
+  products(first: 100, orderBy: price_ASC) {
+    ...productListItem
+  }
+}
+    fragment productListItem on Product {
+  id
+  slug
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsSortByPriceQuery, ProductsSortByPriceQueryVariables>;
 export const ReviewCreateDocument = new TypedDocumentString(`
     mutation ReviewCreate($productId: ID!, $headline: String!, $name: String!, $email: String!, $content: String!, $rating: Int!) {
   createReview(
