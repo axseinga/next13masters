@@ -55,7 +55,7 @@ export async function addToCart(orderId: string, productId: string) {
 	const { product } = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
-		cache: "no-store"
+		cache: "no-store",
 	});
 	if (!product) {
 		throw new Error("Product not found");
@@ -67,7 +67,7 @@ export async function addToCart(orderId: string, productId: string) {
 			productId,
 			total: product.price,
 		},
-		cache: "no-store"
+		cache: "no-store",
 	});
 }
 

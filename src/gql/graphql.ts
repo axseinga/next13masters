@@ -10776,7 +10776,16 @@ export type ProductsGetListByCollectionQueryVariables = Exact<{
 
 export type ProductsGetListByCollectionQuery = { products: Array<{ id: string, slug: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
+export type ProductGetReviewsQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetReviewsQuery = { product?: { reviews: Array<{ id: string, headline: string, name: string, email: string, content: string, rating: number }> } | null };
+
 export type ProductListItemFragment = { id: string, slug: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
+
+export type ProductReviewFragment = { headline: string, name: string, email: string, content: string, rating: number };
 
 export type ProductsGetCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10811,6 +10820,25 @@ export type ProductsSearchByQueryQueryVariables = Exact<{
 
 
 export type ProductsSearchByQueryQuery = { products: Array<{ id: string, slug: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
+export type ReviewCreateMutationVariables = Exact<{
+  productId: Scalars['ID']['input'];
+  headline: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+}>;
+
+
+export type ReviewCreateMutation = { createReview?: { id: string } | null };
+
+export type ReviewPublishMutationVariables = Exact<{
+  reviewId: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewPublishMutation = { publishReview?: { id: string } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10856,6 +10884,15 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
   price
 }
     `, {"fragmentName":"productListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
+export const ProductReviewFragmentDoc = new TypedDocumentString(`
+    fragment productReview on Review {
+  headline
+  name
+  email
+  content
+  rating
+}
+    `, {"fragmentName":"productReview"}) as unknown as TypedDocumentString<ProductReviewFragment, unknown>;
 export const CartAddProductDocument = new TypedDocumentString(`
     mutation CartAddProduct($orderId: ID!, $total: Int!, $productId: ID!) {
   createOrderItem(
@@ -10981,6 +11018,22 @@ export const ProductsGetListByCollectionDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetListByCollectionQuery, ProductsGetListByCollectionQueryVariables>;
+export const ProductGetReviewsDocument = new TypedDocumentString(`
+    query ProductGetReviews($id: ID!) {
+  product(where: {id: $id}) {
+    reviews {
+      id
+      ...productReview
+    }
+  }
+}
+    fragment productReview on Review {
+  headline
+  name
+  email
+  content
+  rating
+}`) as unknown as TypedDocumentString<ProductGetReviewsQuery, ProductGetReviewsQueryVariables>;
 export const ProductsGetCountDocument = new TypedDocumentString(`
     query ProductsGetCount {
   productsConnection {
@@ -11070,3 +11123,19 @@ export const ProductsSearchByQueryDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsSearchByQueryQuery, ProductsSearchByQueryQueryVariables>;
+export const ReviewCreateDocument = new TypedDocumentString(`
+    mutation ReviewCreate($productId: ID!, $headline: String!, $name: String!, $email: String!, $content: String!, $rating: Int!) {
+  createReview(
+    data: {headline: $headline, name: $name, email: $email, content: $content, rating: $rating, product: {connect: {id: $productId}}}
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
+export const ReviewPublishDocument = new TypedDocumentString(`
+    mutation ReviewPublish($reviewId: ID!) {
+  publishReview(where: {id: $reviewId}, to: PUBLISHED) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewPublishMutation, ReviewPublishMutationVariables>;

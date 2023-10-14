@@ -1,0 +1,5 @@
+mutation ReviewPublish($reviewId: ID!) {
+	publishReview(where: { id: $reviewId }, to: PUBLISHED) {
+		id
+	}
+}
