@@ -48,7 +48,7 @@ export const Nav = async () => {
 					<Searchbar />
 					<Link href="/cart" className="flex items-end">
 						<ShoppingCart />
-						<span className="ml-2 text-sm font-medium" data-testid="quantity">{totalItems}</span>
+						<span className="ml-2 text-sm font-medium">{totalItems}</span>
 					</Link>
 				</div>
 			</nav>
