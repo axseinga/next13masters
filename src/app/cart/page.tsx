@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getCartFromCookies, handlePaymentAction } from "@/app/api/cart";
 import { formatCurrency } from "@/utils/utils";
-import { IncrementProductQuantity } from "@/components/atoms/increment-item-quantity";
+import { UpdateProductQuantity } from "@/components/atoms/update-item-quantity";
 import { RemoveButton } from "@/components/atoms/remove-button";
 
 export default async function CartPage() {
@@ -14,6 +14,7 @@ export default async function CartPage() {
 	return (
 		<div className="w-full">
 			<p>Cart Summary</p>
+			<p data-testid="quantity">{cart.orderItems.length}</p>
 			<br></br>
 			<ul className="divide-y divide-gray-800">
 				{cart.orderItems.map((item, index) => (
@@ -23,7 +24,7 @@ export default async function CartPage() {
 							<div className="flex">
 								<span>
 									{item.product?.price && formatCurrency(item.product?.price / 100)} x{" "}
-									<IncrementProductQuantity quantity={item.quantity} itemId={item.id} />
+									<UpdateProductQuantity quantity={item.quantity} itemId={item.id} />
 								</span>{" "}
 								<RemoveButton itemId={item.id} />
 							</div>
